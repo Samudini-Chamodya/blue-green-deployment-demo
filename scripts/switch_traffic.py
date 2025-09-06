@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 import requests
 import sys
@@ -5,7 +6,7 @@ import json
 
 def switch_traffic(controller_url, environment):
     """Switch traffic to specified environment"""
-    print(f"🔄 Switching traffic to {environment} environment...")
+    print(f"Switching traffic to {environment} environment...")
     
     try:
         response = requests.post(
@@ -16,21 +17,21 @@ def switch_traffic(controller_url, environment):
         
         if response.status_code == 200:
             data = response.json()
-            print(f"✅ Traffic successfully switched to {environment}")
-            print(f"📊 Response: {data['message']}")
+            print(f"Traffic successfully switched to {environment}")
+            print(f"Response: {data['message']}")
             return True
         else:
             error_data = response.json()
-            print(f"❌ Failed to switch traffic: {error_data.get('error', 'Unknown error')}")
+            print(f"Failed to switch traffic: {error_data.get('error', 'Unknown error')}")
             return False
             
     except requests.RequestException as e:
-        print(f"❌ Error connecting to traffic controller: {e}")
+        print(f"Error connecting to traffic controller: {e}")
         return False
 
 def rollback_traffic(controller_url, environment):
     """Rollback traffic to specified environment"""
-    print(f"↩️ Rolling back traffic to {environment} environment...")
+    print(f"Rolling back traffic to {environment} environment...")
     return switch_traffic(controller_url, environment)
 
 if __name__ == "__main__":

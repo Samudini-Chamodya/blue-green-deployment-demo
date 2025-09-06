@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 import os
 import shutil
@@ -11,13 +12,13 @@ def deploy_to_environment(environment, version, port):
     """Deploy application to specified environment"""
     env_folder = f"{environment.lower()}_environment"
     
-    print(f"🚀 Starting deployment to {environment} environment...")
+    print(f"Starting deployment to {environment} environment...")
     
     # Create environment directory
     os.makedirs(env_folder, exist_ok=True)
     
     # Copy application files
-    print("📁 Copying application files...")
+    print("Copying application files...")
     shutil.copytree("app", f"{env_folder}/app", dirs_exist_ok=True)
     
     # Update configuration for the environment
@@ -43,8 +44,8 @@ def deploy_to_environment(environment, version, port):
     with open(config_file, 'w') as f:
         json.dump(config_data, f, indent=2)
     
-    print(f"✅ Deployed version {version} to {environment} environment")
-    print(f"🌐 Application will run on port {port}")
+    print(f"Deployed version {version} to {environment} environment")
+    print(f"Application will run on port {port}")
     
     return True
 
@@ -52,7 +53,7 @@ def start_environment(environment, port):
     """Start the application in specified environment"""
     env_folder = f"{environment.lower()}_environment"
     
-    print(f"▶️ Starting {environment} environment on port {port}...")
+    print(f"Starting {environment} environment on port {port}...")
     
     # Create start script
     start_script = f"""
@@ -68,8 +69,8 @@ if __name__ == '__main__':
     with open(f"{env_folder}/start.py", 'w') as f:
         f.write(start_script)
     
-    print(f"✅ {environment} environment ready to start")
-    print(f"💡 Run: cd {env_folder} && python start.py")
+    print(f"{environment} environment ready to start")
+    print(f"Run: cd {env_folder} && python start.py")
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
