@@ -2,7 +2,7 @@
 
 ### Blue Environment (Port 5000)
 ![Blue Environment](screenshots/blue.png)
-*Blue environment showing Version 1.0 with basic features*
+
 
 🚀 **A comprehensive Blue-Green Deployment simulation powered by Jenkins CI/CD pipeline.
 This project demonstrates how to achieve zero-downtime deployments, safe rollbacks, and continuous delivery using modern DevOps practices.**
