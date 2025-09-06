@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue-Green Deployment Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-rocket"></i> Blue-Green Deployment Demo</h1>
+        </header>
+        
+        <main class="main-content">
+            <div class="info-card {{ environment.lower() }}">
+                <div class="version-badge">
+                    <i class="fas fa-tag"></i>
+                    Version: {{ version }}
+                </div>
+                
+                <div class="environment-badge">
+                    <i class="fas fa-server"></i>
+                    Environment: <span class="env-name">{{ environment }}</span>
+                </div>
+                
+                <div class="features-section">
+                    <h3><i class="fas fa-list-check"></i> Features</h3>
+                    <ul class="features-list">
+                        {% for feature in features %}
+                        <li><i class="fas fa-check-circle"></i> {{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div class="status-section">
+                    <div class="status-item">
+                        <i class="fas fa-heart-pulse"></i>
+                        <span class="status-label">Health Status:</span>
+                        <span class="status-value healthy">healthy</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-clock"></i>
+                        <span class="status-label">Timestamp:</span>
+                        <span class="status-value">{{ timestamp }}</span>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="refreshVersion()">
+                        <i class="fas fa-sync-alt"></i> Refresh Version
+                    </button>
+                    <button class="btn btn-secondary" onclick="healthCheck()">
+                        <i class="fas fa-stethoscope"></i> Health Check
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        async function refreshVersion() {
+            try {
+                const response = await fetch('/api/version');
+                const data = await response.json();
+                location.reload();
+            } catch (error) {
+                console.error('Error refreshing version:', error);
+            }
+        }
+        async function healthCheck() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                alert(`Health Check Result:\nStatus: ${data.status}\nVersion: ${data.version}\nEnvironment: ${data.environment}`);
+            } catch (error) {
+                alert('Health check failed: ' + error.message);
+            }
+        }
+        // Auto-refresh every 30 seconds
+        setInterval(refreshVersion, 30000);
+    </script>
+</body>
+</html>
