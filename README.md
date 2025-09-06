@@ -60,12 +60,6 @@ Blue-Green deployment is crucial for modern applications because it provides:
          │    (Admin Panel)     │
          └─────────────────────┘
 ```
-# Blue Environment → Stable environment running version 1.0
-
-# Green Environment → Deployment target for version 2.0
-
-# Traffic Controller → Admin panel for switching traffic between Blue and Green
-
 ## 📋 Prerequisites
 
 - **Jenkins** (Latest LTS version)
